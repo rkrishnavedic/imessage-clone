@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, selectUser } from '../../features/userSlice';
 import db, { auth } from '../../firebase/firebase';
 import UploadAvatar from './uploadavatar';
+import {motion} from 'framer-motion';
 
 
 const Sidebar=()=>{
@@ -103,10 +104,10 @@ const Sidebar=()=>{
                 </div>
             </div>
             {showDropdown &&
-                <div onClick={handleOutClick} className="settings-modal">
-                    <div className="settings-menu">
+                <motion.div initial={{opacity:0}} animate={{opacity:1}} onClick={handleOutClick} className="settings-modal">
+                    <motion.div initial={{scale:0}} animate={{scale:1}} className="settings-menu">
                         {!settingsTab?
-                        <>
+                        <div>
                         <div className="user-det">
                             <Avatar src={user.photoURL} style={{width:'70px', height:"70px"}}/>
                             <span style={{color:'blue', marginTop:'5px'}}>{user.displayName!=null? user.displayName: '<No Name>'}</span>
@@ -121,7 +122,7 @@ const Sidebar=()=>{
                                 <PowerSettingsNew/>
                             </IconButton>
                         </div>
-                        </>
+                        </div>
                         :
                         <div className="settings-set">
                             <IconButton>
@@ -131,15 +132,15 @@ const Sidebar=()=>{
                                 <input value={editName} onChange={(e)=>{setEditName(e.target.value)}} placeholder="your name"/>
                                 <UploadAvatar/>
                                 <div className="settings-save">
-                                    <Button variant="outlined" color="primary" onClick={handleSaveChanges}>Save Changes</Button>
-                                    <Button variant="outlined" color="default" onClick={handleCancelChanges}>Cancel</Button>
+                                    <Button style={{borderRadius:"20px"}} variant="contained" color="primary" onClick={handleSaveChanges}>Save Changes</Button>
+                                    <Button style={{borderRadius:"20px"}} variant="contained" color="default" onClick={handleCancelChanges}>Cancel</Button>
                                 </div>
                                 
                             </div>
                         </div>
                         }
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             }
         </div>
     )

@@ -17,8 +17,22 @@
     width: 100%;
 }
 
+.sidebar-chat-info >h3{
+    font-size: 15px;
+}
+
+.sidebar-chat-info >p{
+    font-size: 13px;
+}
+
 .sidebar-chat-info >small{
-    position: absolute;
     top: 5px;
+    font-size: 11px;
     right: 0;
 }
+
+@media only screen and (min-width: 900px) {
+    .sidebar-chat-info >small {
+      position: absolute;
+    }
+  }

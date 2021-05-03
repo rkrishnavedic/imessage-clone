@@ -130,7 +130,28 @@
     cursor: pointer;
 }
 
+.progress-background {
+	background-color: #ffffff;
+	border-radius: 20px;
+	position: relative;
+	height: 20px;
+	width: 100%;
+}
 
+.progress-done {
+	background: linear-gradient(to right , #7970f2, #ff72a8);
+	border-radius: 20px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	transition: 1s ease 0.3s;
+}
+
+.avatar-span:hover{
+    background:#3e6bfd;
+}
 
 .settings-modal .settings-set{
     background: linear-gradient(to right bottom,rgba(255, 255, 255, 0.25), rgba(145, 180, 255, 0.25));

@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectChatId, selectChatName } from '../../features/chatSlice';
 import db from '../../firebase/firebase';
-import Message from '../message/message';
 import './chatarea.css';
 import firebase from 'firebase';
 import { selectUser } from '../../features/userSlice';
-import FlipMove from 'react-flip-move';
+import MessagesDisplay from './messagesDisplay';
+
 
 const ChatArea=()=>{
 
@@ -18,10 +18,11 @@ const ChatArea=()=>{
     const [messages, setMessages] = useState([]);
     const user = useSelector(selectUser);
 
+
     useEffect(()=>{
         if(chatId){
             db.collection('chats').doc(chatId).collection('messages')
-                .orderBy('timestamp', 'desc')
+                .orderBy('timestamp', 'asc')
                 .onSnapshot(snapshot=>
                     setMessages(snapshot.docs.map((doc)=>(
                         {
@@ -50,6 +51,7 @@ const ChatArea=()=>{
         setText('');
     }
 
+
     return(
         <div>
             <div className="chat">
@@ -62,22 +64,11 @@ const ChatArea=()=>{
                         <PlusIcon/>
                     </IconButton>
                 </div>
-                <div className="chat-messages">
-                    {
-                        chatId?
-                        <FlipMove>
-                        {messages.map(message=>{
-                            return(
-                                <Message key={message.id} contents={message.data}/>
-                            )
-                        })}
-                        </FlipMove>
-                        :
-                        <div className="empty-message">
-                            No conversations selected!
-                        </div>
-                    }
+                {chatId? <MessagesDisplay messages={messages}/> :
+                <div className="empty-message">
+                    No conversations selected!
                 </div>
+                }
                 <div className="chat-input">
                     <form>
                         <input value={text} onChange={(e)=>setText(e.target.value)} placeholder="Type something" type="text"/>

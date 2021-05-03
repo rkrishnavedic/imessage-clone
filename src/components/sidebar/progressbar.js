@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './sidebar';
-import {motion} from 'framer-motion';
 import useStorage from '../../firebase/useStorage';
 import { auth } from '../../firebase/firebase';
 
@@ -19,10 +18,11 @@ const ProgressBar = ({file, setFile})=>{
     
 
     return (
-        <motion.div
-        initial={{width:0}}
-        animate={{width: progress+'%'}}
-        className="bg-primary progress-bar p-3">{Math.round(progress)}%</motion.div>
+        <div className="progress-background">
+            <div style={{width:`${Math.round(progress/4)+75}%`}} className="progress-done">
+                {Math.round(progress)}%
+            </div>
+        </div>
     )
 }
 
