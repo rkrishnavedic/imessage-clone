@@ -6,6 +6,16 @@
     cursor: pointer;
 }
 
+.sidebar-chat-active{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #3e93fd;
+    color: white;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+}
+
 .sidebar-chat:hover{
     background: #3e93fd;
     color: white;

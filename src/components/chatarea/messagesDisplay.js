@@ -9,6 +9,7 @@ const MessagesDisplay=({messages})=>{
 
     useEffect(()=>{
         messageEndRef.current?.scrollIntoView({behavior: "smooth"});
+        //console.log('scrolling bottom');
     },[messages]);
 
 
