@@ -25,7 +25,7 @@ const MessagesDisplay=({messages})=>{
                         </FlipMove>
                        
                     }
-                    <div ref={messageEndRef}/>
+                    <div ref={messageEndRef}></div>
         </div>
     )
 }
