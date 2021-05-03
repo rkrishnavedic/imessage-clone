@@ -31,7 +31,7 @@ const SidebarChat=(props)=>{
             .onSnapshot(snapshot=>{
                 setChatInfo(snapshot.docs.map(doc=>doc.data()))
             })
-    },[])
+    },[id])
 
 
     return(

@@ -4,6 +4,7 @@ import Sidebar from '../sidebar/sidebar';
 import './chat.css';
 
 const Chat=()=>{
+
     return (
         <div className="imessage">
             <Sidebar/>
