@@ -35,12 +35,16 @@ const ChatArea=()=>{
 
     const sendMessage=(e)=>{
         e.preventDefault();
+
+        //console.log(user);
         
         db.collection('chats').doc(chatId).collection('messages').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             message: text,
             uid: user.uid,
-            email: user.email
+            email: user.email,
+            photo: user.photoURL,
+            name: user.displayName
         })
 
         setText('');
@@ -59,13 +63,20 @@ const ChatArea=()=>{
                     </IconButton>
                 </div>
                 <div className="chat-messages">
-                    <FlipMove>
+                    {
+                        chatId?
+                        <FlipMove>
                         {messages.map(message=>{
                             return(
                                 <Message key={message.id} contents={message.data}/>
                             )
                         })}
-                    </FlipMove>
+                        </FlipMove>
+                        :
+                        <div className="empty-message">
+                            No conversations selected!
+                        </div>
+                    }
                 </div>
                 <div className="chat-input">
                     <form>

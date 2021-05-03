@@ -18,7 +18,9 @@ function App() {
         dispatch(
           login({
             uid: authUser.uid,
-            email: authUser.email
+            email: authUser.email,
+            photoURL: authUser.photoURL,
+            displayName: authUser.displayName
             })
         )
 

@@ -39,3 +39,104 @@
 .sidebar-chats{
     overflow: scroll;
 }
+
+.avatar-glow{
+    border: 2px solid rgba(255, 255, 255, 0);
+    cursor: pointer;
+}
+
+.avatar-glow:hover{
+    border: 2px solid rgb(0, 132, 255);
+}
+
+.settings-modal{
+    position: fixed;
+    z-index: 1080;
+    left: 0;
+    top:0;
+    place-items: center;
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(199, 216, 253, 0.25);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+}
+
+.settings-modal .settings-menu{
+    width: 360px;
+    border-radius: 10px;
+    background: linear-gradient(to right bottom,rgba(255, 255, 255, 0.25), rgba(145, 180, 255, 0.25));
+    display: flex;
+    box-shadow: 0 2px 16px 0 rgba(66, 66, 66, 0.37);
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.settings-modal .user-det{
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.settings-modal .user-menu{
+    background: lightgray;
+    display: grid;
+    grid-template-columns: auto auto;
+    place-items: center;
+    padding: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.settings-modal .settings-edit{
+    background: lightgray;
+    padding: 20px;
+    place-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-edit >input{
+    outline-width: 0;
+    width: 200px;
+    border: 1px solid lightgray;
+    border-radius: 1000px;
+    padding: 7px;
+}
+
+.settings-edit .settings-save{
+    margin-top: 20px;
+}
+
+.settings-save >button{
+    margin: 10px;
+}
+
+.avatar-form{
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar-form .avatar-span{
+    background: #3e93fd;
+    padding: 10px;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px 0 rgba(66, 66, 66, 0.37);
+    cursor: pointer;
+}
+
+
+
+.settings-modal .settings-set{
+    background: linear-gradient(to right bottom,rgba(255, 255, 255, 0.25), rgba(145, 180, 255, 0.25));
+    border-radius: 10px;
+}
+
+.user-menu >button{
+    width: fit-content;
+}

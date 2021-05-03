@@ -30,6 +30,15 @@
     overflow: scroll;
 }
 
+.empty-message{
+    display: grid;
+    place-items: center;
+    font-size: x-large;
+    color: gray;
+    height: 100%;
+    width: 100%;
+}
+
 .chat-input{
     display: flex;
     align-items: center;

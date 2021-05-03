@@ -16,7 +16,7 @@ const Login = ()=>{
 
     const signIn = ()=>{
         auth.signInWithEmailAndPassword(email, password)
-            .catch(err=>console.log(err.message))
+            .catch(err=>setError(err.message))
 
         clearInputs();
     }
@@ -29,8 +29,8 @@ const Login = ()=>{
                 <FormGroup className="login-form">
                     <Input value={email} onChange={(e)=>{setError('');setEmail(e.target.value)}} placeholder="email" type="email"/>
                     <Input value={password} onChange={(e)=>{setError('');setPassword(e.target.value)}} placeholder="password" type="password"/>
+                    {error && <p style={{color:'red',fontSize:'12px', textAlign:'center'}}>{error}</p>}
                     <Button onClick={signIn}>sign in</Button>
-                    
                 </FormGroup>
             </div>
         </div>

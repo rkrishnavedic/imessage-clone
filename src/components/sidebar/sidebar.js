@@ -1,20 +1,29 @@
-import { Avatar, IconButton } from '@material-ui/core';
+import { Avatar, Button, IconButton } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './sidebar.css';
 import {
+    ArrowBack,
+    PowerSettingsNew,
      RateReviewOutlined as RateReviewOutlinedIcon,
-     Search as SearchIcon
+     Search as SearchIcon,
+     Settings
  } from '@material-ui/icons';
 import SidebarChat from '../sidebarchat/sidebarchat';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../features/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, selectUser } from '../../features/userSlice';
 import db, { auth } from '../../firebase/firebase';
+import UploadAvatar from './uploadavatar';
 
 
 const Sidebar=()=>{
 
+    const dispatch = useDispatch();
+
     const user = useSelector(selectUser);
     const [chats, setChats] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [settingsTab, setSettingsTab] = useState(false);
+    const [editName, setEditName] = useState(user.displayName);
 
     useEffect(()=>{
         db.collection('chats').onSnapshot(snapshot=>{
@@ -36,11 +45,46 @@ const Sidebar=()=>{
         }
     }
 
+    const handleAvatarClick=()=>{
+        setShowDropdown(!showDropdown);
+        //console.log(user);
+    }
+
+    const handleOutClick=(e)=>{
+        if(e.target.classList.contains('settings-modal')) {
+            setShowDropdown(false);
+            setSettingsTab(false);
+        }
+    }
+
+    const handleCancelChanges=()=>{
+        setSettingsTab(false);
+        setEditName(user?.displayName);
+    }
+
+    const handleSaveChanges=async ()=>{
+
+        await auth.currentUser.updateProfile({
+            displayName: editName
+        })
+
+            dispatch(
+                login({
+                  uid: auth.currentUser.uid,
+                  email: auth.currentUser.email,
+                  photoURL: auth.currentUser.photoURL,
+                  displayName: auth.currentUser.displayName
+                  })
+              )
+        setSettingsTab(false);
+
+    }
+
     return (
         <div>
             <div className="sidebar">
                 <div className="sidebar-header">
-                    <Avatar onClick={()=> auth.signOut()} src='https://randomuser.me/api/portraits/women/11.jpg' />
+                    <Avatar className="avatar-glow" onClick={handleAvatarClick} src={user.photoURL} />
                     <div className="sidebar-search">
                         <SearchIcon/>
                         <input placeholder="Search"/>
@@ -58,6 +102,45 @@ const Sidebar=()=>{
                     })}
                 </div>
             </div>
+            {showDropdown &&
+                <div onClick={handleOutClick} className="settings-modal">
+                    <div className="settings-menu">
+                        {!settingsTab?
+                        <>
+                        <div className="user-det">
+                            <Avatar src={user.photoURL} style={{width:'70px', height:"70px"}}/>
+                            <span style={{color:'blue', marginTop:'5px'}}>{user.displayName!=null? user.displayName: '<No Name>'}</span>
+                             <small>{user.email}</small>
+                        </div>
+                        <div className="user-menu">
+                            <IconButton title="settings">
+                                <Settings onClick={()=>setSettingsTab(true)}/>
+                            </IconButton>
+                            
+                            <IconButton onClick={()=>auth.signOut()} title="logout">
+                                <PowerSettingsNew/>
+                            </IconButton>
+                        </div>
+                        </>
+                        :
+                        <div className="settings-set">
+                            <IconButton>
+                                <ArrowBack onClick={()=>setSettingsTab(false)}/>
+                            </IconButton>
+                            <div className="settings-edit">
+                                <input value={editName} onChange={(e)=>{setEditName(e.target.value)}} placeholder="your name"/>
+                                <UploadAvatar/>
+                                <div className="settings-save">
+                                    <Button variant="outlined" color="primary" onClick={handleSaveChanges}>Save Changes</Button>
+                                    <Button variant="outlined" color="default" onClick={handleCancelChanges}>Cancel</Button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            }
         </div>
     )
 }
