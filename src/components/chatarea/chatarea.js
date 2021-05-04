@@ -35,6 +35,7 @@ const ChatArea=()=>{
     },[chatId])
 
     const sendMessage=(e)=>{
+        if(text==='') return;
         e.preventDefault();
 
         //console.log(user);
