@@ -8,6 +8,7 @@ import './chatarea.css';
 import firebase from 'firebase';
 import { selectUser } from '../../features/userSlice';
 import MessagesDisplay from './messagesDisplay';
+import FilterWords from 'bad-words';
 
 
 const ChatArea=()=>{
@@ -17,6 +18,8 @@ const ChatArea=()=>{
     const chatId = useSelector(selectChatId);
     const [messages, setMessages] = useState([]);
     const user = useSelector(selectUser);
+
+    const FilterText = new FilterWords();
 
 
     useEffect(()=>{
@@ -39,10 +42,12 @@ const ChatArea=()=>{
         e.preventDefault();
 
         //console.log(user);
+
+        const cleantext = FilterText.clean(text);
         
         db.collection('chats').doc(chatId).collection('messages').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            message: text,
+            message: cleantext,
             uid: user.uid,
             email: user.email,
             photo: user.photoURL,
