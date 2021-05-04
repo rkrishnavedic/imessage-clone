@@ -15,7 +15,7 @@ function App() {
 
   const initUser = useCallback(()=>{
     auth.onAuthStateChanged(authUser=>{
-      if(authUser.emailVerified){
+      // if(authUser.emailVerified){
       if(authUser){
 
         dispatch(
@@ -30,7 +30,7 @@ function App() {
       }else{
         dispatch(logout());
       }
-    }
+    // }
     })
   },[dispatch])
 
