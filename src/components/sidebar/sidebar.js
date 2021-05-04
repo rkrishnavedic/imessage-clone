@@ -66,7 +66,7 @@ const Sidebar=()=>{
     const handleSaveChanges=async ()=>{
 
         await auth.currentUser.updateProfile({
-            displayName: editName
+            displayName: editName,
         })
 
             dispatch(
