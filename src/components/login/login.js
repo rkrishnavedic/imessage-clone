@@ -4,7 +4,7 @@ import { Button, FormGroup, Input} from '@material-ui/core';
 import { auth } from '../../firebase/firebase';
 import { motion } from 'framer-motion';
 
-const Login = ()=>{
+const Login = (props)=>{
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +17,11 @@ const Login = ()=>{
 
     const signIn = ()=>{
         auth.signInWithEmailAndPassword(email, password)
+            .then(res=>{
+                if(res.user.emailVerified===false){
+                    setError('Your email is not verified. Check your mailbox!');
+                }
+            })
             .catch(err=>setError(err.message))
 
         clearInputs();
@@ -30,8 +35,9 @@ const Login = ()=>{
                 <FormGroup className="login-form">
                     <Input value={email} onChange={(e)=>{setError('');setEmail(e.target.value)}} placeholder="email" type="email"/>
                     <Input value={password} onChange={(e)=>{setError('');setPassword(e.target.value)}} placeholder="password" type="password"/>
-                    {error && <p style={{color:'red',fontSize:'12px', textAlign:'center'}}>{error}</p>}
+                    <p style={{color:'red',fontSize:'12px', textAlign:'center'}}>{error}</p>
                     <Button onClick={signIn}>sign in</Button>
+                    <p style={{color:'#3ea4fb',marginTop:'10px',fontSize:'13px', textAlign:'center'}}>dont have account? &ensp;<span onClick={()=>props.setShowSignUpForm(true)} style={{fontWeight:'bold', cursor:'pointer'}}>Register</span></p>
                 </FormGroup>
             </div>
         </motion.div>

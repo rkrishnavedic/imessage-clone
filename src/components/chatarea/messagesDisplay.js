@@ -15,17 +15,16 @@ const MessagesDisplay=({messages})=>{
 
     return(
         <div className="chat-messages">
-                    {
-                        <FlipMove>
-                        {messages.map(message=>{
-                            return(
-                                <Message key={message.id} contents={message.data}/>
-                            )
-                        })}
-                        </FlipMove>
-                       
-                    }
-                    <div ref={messageEndRef}></div>
+            <FlipMove>
+                        
+                {messages.map(message=>{
+                    return(
+                        <Message key={message.id} contents={message.data}/>
+                    )
+                })}
+                    
+            </FlipMove>
+            <div ref={messageEndRef}></div>
         </div>
     )
 }

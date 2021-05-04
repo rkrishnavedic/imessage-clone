@@ -41,7 +41,7 @@ const SidebarChat=(props)=>{
                 <Avatar src={chatInfo[0]?.photo} />
                 <div className="sidebar-chat-info">
                     <h3>{chatName}</h3>
-                    <p>{chatInfo[0]?.message}</p>
+                    <p>{chatInfo[0]? ( chatInfo[0]?.message?.length<=28? chatInfo[0]?.message : chatInfo[0]?.message.substring(0,25)+'...'): ''}</p>
                     <small>{timeagoFormat(new Date(chatInfo[0]?.timestamp?.toDate()))}</small>
                 </div>
             </div>

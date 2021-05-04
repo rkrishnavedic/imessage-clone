@@ -71,7 +71,7 @@ const ChatArea=()=>{
                 }
                 <div className="chat-input">
                     <form>
-                        <input value={text} onChange={(e)=>setText(e.target.value)} placeholder="Type something" type="text"/>
+                        <input disabled={chatId? false: true} value={text} onChange={(e)=>setText(e.target.value)} placeholder="Type something" type="text"/>
                         <button onClick={sendMessage}>Send Message</button>
                     </form>
 
