@@ -8,7 +8,7 @@ const MessagesDisplay=({messages})=>{
     const messageEndRef=useRef();
 
     useEffect(()=>{
-        messageEndRef.current?.scrollIntoView({behavior: "smooth"});
+        messageEndRef.current?.scrollIntoView();
         //console.log('scrolling bottom');
     },[messages]);
 
@@ -24,7 +24,7 @@ const MessagesDisplay=({messages})=>{
                 })}
                     
             </FlipMove>
-            <div ref={messageEndRef}></div>
+            <div ref={messageEndRef}/>
         </div>
     )
 }
