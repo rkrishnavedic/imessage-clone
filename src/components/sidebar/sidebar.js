@@ -26,6 +26,7 @@ const Sidebar=()=>{
     const [settingsTab, setSettingsTab] = useState(false);
     const [editName, setEditName] = useState(user.displayName);
 
+
     useEffect(()=>{
         db.collection('chats').onSnapshot(snapshot=>{
             setChats(snapshot.docs.map(doc=>({
