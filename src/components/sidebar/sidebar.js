@@ -119,7 +119,7 @@ const Sidebar=()=>{
                                 <Settings onClick={()=>setSettingsTab(true)}/>
                             </IconButton>
                             
-                            <IconButton onClick={()=>auth.signOut()} title="logout">
+                            <IconButton onClick={()=>{auth.signOut();window.location.reload();}} title="logout">
                                 <PowerSettingsNew/>
                             </IconButton>
                         </div>
