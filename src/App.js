@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Chat from './components/chat/chat';
@@ -13,9 +13,9 @@ function App() {
   const dispatch = useDispatch();
   const [showSignUpForm, setShowSignUpForm] = useState(false);
 
-  useEffect(()=>{
+  const initUser = useCallback(()=>{
     auth.onAuthStateChanged(authUser=>{
-       //if(authUser?.emailVerified){
+      // if(authUser?.emailVerified){
       if(authUser){
 
         dispatch(
@@ -30,9 +30,13 @@ function App() {
       }else{
         dispatch(logout());
       }
-     //}
+    // }
     })
-  },[user])
+  },[dispatch])
+
+  useEffect(()=>{
+    initUser();
+  },[initUser])
 
   return (
     <div>

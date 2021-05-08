@@ -1,5 +1,5 @@
 import { IconButton } from '@material-ui/core';
-import {  ControlPoint as PlusIcon, MicNoneOutlined} from '@material-ui/icons';
+import {  ControlPoint as PlusIcon, MicNone as MicNoneIcon } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectChatId, selectChatName } from '../../features/chatSlice';
@@ -9,7 +9,6 @@ import firebase from 'firebase';
 import { selectUser } from '../../features/userSlice';
 import MessagesDisplay from './messagesDisplay';
 import FilterWords from 'bad-words';
-
 
 
 const ChatArea=()=>{
@@ -78,14 +77,13 @@ const ChatArea=()=>{
                 }
                 <div className="chat-input">
                     <form>
-                        <input disabled={chatId? true: true} value={text} onChange={(e)=>{setText(e.target.value);console.log('change')}} placeholder="Type something" type="text"/>
+                        <input disabled={chatId? false: true} value={text} onChange={(e)=>setText(e.target.value)} placeholder="Type something" type="text"/>
                         <button onClick={sendMessage}>Send Message</button>
                     </form>
 
                     <IconButton>
-                        <MicNoneOutlined/>
+                        <MicNoneIcon/>
                     </IconButton>
-
                 </div>
             </div>
         </div>

@@ -23,7 +23,6 @@ const SidebarChat=(props)=>{
                 chatName: chatName
             })
         )
-        
     }
 
     useEffect(()=>{
