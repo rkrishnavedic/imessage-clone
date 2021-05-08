@@ -29,7 +29,10 @@ const SignUp = (props)=>{
         auth.createUserWithEmailAndPassword(email, password)
             .then((res)=>{
                 console.log(res);
-                res.user.sendEmailVerification();
+                //res.user.sendEmailVerification();
+                res.user.updateProfile({
+                    displayName: username
+                })
                 setSignUpSuccess(true);
             })
             .catch(err=>setError(err.message))

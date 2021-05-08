@@ -10,7 +10,7 @@ import {
  } from '@material-ui/icons';
 import SidebarChat from '../sidebarchat/sidebarchat';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, selectUser } from '../../features/userSlice';
+import { login, logout, selectUser } from '../../features/userSlice';
 import db, { auth } from '../../firebase/firebase';
 import UploadAvatar from './uploadavatar';
 import {motion} from 'framer-motion';
@@ -119,7 +119,7 @@ const Sidebar=()=>{
                                 <Settings onClick={()=>setSettingsTab(true)}/>
                             </IconButton>
                             
-                            <IconButton onClick={()=>{auth.signOut();window.location.reload();}} title="logout">
+                            <IconButton onClick={()=>{auth.signOut();dispatch(logout());}} title="logout">
                                 <PowerSettingsNew/>
                             </IconButton>
                         </div>

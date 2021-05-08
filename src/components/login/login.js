@@ -30,10 +30,10 @@ const Login = (props)=>{
     const signIn = ()=>{
         auth.signInWithEmailAndPassword(email, password)
             .then(res=>{
-                if(res.user.emailVerified===false){
+                // if(res.user.emailVerified===false){
                     setError('Your email is not verified. Check your mailbox!');
-                    res.user.sendEmailVerification();
-                }
+                    // res.user.sendEmailVerification();
+                // }
             })
             .catch(err=>setError(err.message))
 
