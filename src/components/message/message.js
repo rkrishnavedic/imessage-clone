@@ -1,5 +1,5 @@
 import { Avatar } from '@material-ui/core';
-import React, { forwardRef } from 'react';
+import React, { forwardRef} from 'react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
 import './message.css';
@@ -11,6 +11,7 @@ const Message = forwardRef(
     )=>{
 
     const user = useSelector(selectUser);
+      
 
     return (
         <div ref={ref} className={`message ${user.email === email && "message-sender"}`}>
